@@ -1,5 +1,5 @@
 <template>
-    <div class="ww-typeform-embed"></div>
+    <div class="ww-typeform-embed" :class="{ 'ww-editing': isEditing }"></div>
 </template>
 
 <script>
@@ -12,6 +12,9 @@ export default {
     },
     props: {
         content: { type: Object, required: true },
+        /* wwEditor:start */
+        wwEditorState: { type: Object, required: true },
+        /* wwEditor:end */
     },
     emits: ['update:content:effect', 'update:content'],
     data() {
@@ -19,7 +22,15 @@ export default {
             mounted: false,
         };
     },
-    computed: {},
+    computed: {
+        isEditing() {
+            /* wwEditor:start */
+            return this.wwEditorState.editMode === wwLib.wwEditorHelper.EDIT_MODES.EDITION;
+            /* wwEditor:end */
+            // eslint-disable-next-line no-unreachable
+            return false;
+        },
+    },
     watch: {
         'content.formId'() {
             this.createForm();
@@ -39,3 +50,9 @@ export default {
     },
 };
 </script>
+
+<style scoped>
+.ww-typeform-embed.ww-editing {
+    pointer-events: none;
+}
+</style>
