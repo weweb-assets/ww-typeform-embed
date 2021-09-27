@@ -7,9 +7,6 @@ import { createWidget } from '@typeform/embed';
 import '@typeform/embed/build/css/widget.css';
 
 export default {
-    wwDefaultContent: {
-        formId: '',
-    },
     props: {
         content: { type: Object, required: true },
         /* wwEditor:start */
