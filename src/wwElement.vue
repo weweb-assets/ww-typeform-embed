@@ -1,5 +1,5 @@
 <template>
-    <div class="ww-typeform-embed" :class="{ 'ww-editing': isEditing }"></div>
+    <div class="ww-typeform-embed" :class="{ 'editing': isEditing }"></div>
 </template>
 
 <script>
@@ -48,8 +48,14 @@ export default {
 };
 </script>
 
-<style scoped>
-.ww-typeform-embed.ww-editing {
-    pointer-events: none;
+<style scoped lang="scss">
+.ww-typeform-embed {
+    position: relative;
+    &.editing::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        z-index: 1;
+    }
 }
 </style>
